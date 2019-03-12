@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "synthesis-234002",
+  "private_key_id": "00a2b2fe108f3579b40f3a0e0ab21c906451b79e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC1DMLwlbjCx/G5\n4m/kfnUiiQ0fBO4x2/Yb9dqunsl6RJPgptqTqzJJzMoYem7m6oECJX9PISTc7TEj\nlaDstgPJUHGrvOJSCXzM7Vejvh2/RvMvUQJKM7Jy5619h7IhxokP0ASx58Wzz7Op\n0/5Du729L6iOtUmKZF2WInmE+vuhePG47K4QttLnjetubcLmCpXCWBpPJ+TRyDBJ\nBxWtQ8wW2EPmaZVloH/muQxLw+rzE0PjNXLbzosgmGMGDV2TG2bE0AFe+HncjSRo\nFs19HmRwgA+DFMW//Sfb5iHC5mWqVBFv1poTza+KMMRUWIghGcYOxCkMvulhFUF7\nkoVUs/8rAgMBAAECggEAHxXwWKeUYBk9d1maNaTCzumyL4vErBnk0Vsur4HC/TPO\nIinz6Jvh2AsJ/hbzeMF14hz3FWqO7kHpiH8V8N61mrits7uMLmLDo1nzDMHFUMTJ\nV2v01TG4J4OA5cdJPgRdHzJrw/IUH3H/mp60DwQqqVOIAOy+kjz2VqNXsw3263vT\nG/NHgAsCUm8kamACUIyG0/BFgaqyRvWSMfOuszygs/83dCuVIOIdp9hIaEC4ZfAr\nGqUw5sErxCwL+0HOTFdTP3Q73hYcGLrbbjP8QZ/cL1m5adaw5DWennvclgavTQ5H\nOLwRfD+OM0kj4rU8APW0LaMBgIJ9Y95/XfPt7EXVPQKBgQDiNcxDY82d+Zm07574\nVxxkUCEyCSCG/p5Mke6t3KKYxEvUwwYM7dLhGuZRvHtcG2x3lJn4nqVK9rvbTi8/\nmYng3Ti7SkG3fcmQ1Xmys+/Ig6HY+YXxjXaINmFk6MuGB5m5U+qWrA6cKdR+Kfra\n2b3NYneHnIDuzCgpbl5VKu+cbwKBgQDM5HqCgrhOwKt+i7hsVfeAO19EmLMQ2FHw\nMX7tXLsu046eip5NXOr9hM8SUaZAoknrDwBotfzF3y0BrT9867XpFEAktcPkvQsI\nOXqpSuFI0wOex1iNZmtlKf6/PkrBhRf0x7RQqKQpu32/X0rP1/2n8k9P4KcK/PGp\nU3ZH+nOfBQKBgDfY+Fka5sS9vskA78p4FzZc4hUsU6+AZSyaSsb51drJe79HdtLy\nVEHnFj3PvtT6oEjVkz3iTQS47aAzKU8WZQfzFfKHXroigAUV7znDWsuyU97xm7QL\nLNxsMJdtMfIhJj6vDRet2t2LJj8PtjMZ1tZCHSiJ5vsNxEyWRwvX0dhZAoGAaD+j\n+b2LCz7KwwNSHYUL/em3ik5rZZm67wwv+ZNiBexMN2xuKQyq37zwIvD6Nw6br4ad\nfamC6CaqXp0InYXMs7/C9yqodjydXVzphTN9NrFuuR3Sd3dyEzHv1Nxb6uTOEJR/\nsT5s8HLeAz338ZKDFC2cnxa9x0B1sOKvXuYWaAUCgYA42KnCvaiCSa2WOWkB/18k\nzlT6QNQiZpteM6GFmi6MUuGcRe38sRKm6yeIP1O4QSieMoM1AeJUQQ+D8wxV3AaJ\ntJpBNatC5GjlnFui3UiYSZT62MVtu7skIO4NYNh0TpYGIaiAZsERNZo7sglGrIi9\ntM548rfMOWSid6x1OugEFA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "synthesis-custom-service@synthesis-234002.iam.gserviceaccount.com",
+  "client_id": "108412633519203537997",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/synthesis-custom-service%40synthesis-234002.iam.gserviceaccount.com"
+}

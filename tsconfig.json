@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "sourceMap": true,
+        "noImplicitReturns": true,
+        "noUnusedParameters": true,
+        "noEmitOnError": true,
+        "noUnusedLocals": true,
+        "declaration": false,
+        "jsx": "react",
+        "target": "ES5",
+        "baseUrl": ".",
+        "moduleResolution": "node",
+        "pretty": true,
+        "removeComments": true,
+        "lib": [
+            "es6",
+            "dom"
+        ],
+        "paths": { //Allow for relative file path includes from the following as roots. Lets me include as if I'm relative to these dirs.
+            "*": [
+                "src/app/*",
+                "src/app/components/*"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
