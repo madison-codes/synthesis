@@ -41,3 +41,20 @@ export function getRecord(id: string, success: any) {
       });
   };
 }
+
+export function getRecords() {
+  return (dispatch: any) => {
+    Api.getRecords()
+      .then(res => {
+        console.log("in response");
+        console.log(res);
+        dispatch({
+          type: "GET_ALL_RECORDS",
+          payload: res
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+}
