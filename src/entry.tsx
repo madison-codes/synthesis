@@ -1,21 +1,16 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { createStore, applyMiddleware } from "redux";
+import * as Redux from "redux";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import ReduxThunk from "redux-thunk";
 import Theme from "./theme/ThemeWrapper";
 import rootReducer from "./reducers";
 import App from "./App";
-import ReduxThunk from "redux-thunk";
 
-function getMiddleware() {
-  const middleware = [ReduxThunk];
-  return middleware;
-}
-
-const store = createStore(
-  rootReducer as any,
-  applyMiddleware(...getMiddleware())
+const store = Redux.createStore(
+  rootReducer,
+  Redux.applyMiddleware(ReduxThunk as Redux.Middleware)
 );
 
 ReactDOM.render(

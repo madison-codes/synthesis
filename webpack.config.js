@@ -42,6 +42,10 @@ module.exports = {
                 test: /\.json$/,
                 loader: "json-loader",
                 include: "/build/contracts/"
+            },
+            {
+                test: /\.mp3$/,
+                loader: 'file-loader'
             }
         ]
     }

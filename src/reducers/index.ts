@@ -1,20 +1,24 @@
 const defaultState = {
-  text: ""
+  id: null,
+  name: null,
+  mp3: null
 };
 
 export default function(state = defaultState, action: any) {
   if (action.type === "TO_VOICE") {
     return {
-      text: action.payload
+      id: action.payload.id,
+      name: action.payload.name,
+      mp3: action.payload.mp3
     };
   }
-  if (action.type === "INIT_ENCRYPT") {
+  //   Not used right now
+  if (action.type === "GET_RECORD") {
     return {
-      user: action.payload
+      id: action.payload.id,
+      name: action.payload.name,
+      mp3: action.payload.mp3
     };
-  }
-  if (action.type === "GET_PII") {
-    return {};
   }
   return state;
 }

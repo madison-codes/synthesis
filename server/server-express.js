@@ -1,13 +1,16 @@
 const express = require("express");
-const path = require("path");
-const fs = require("fs");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
+
+const Firestore = require("@google-cloud/firestore");
+
+const db = new Firestore({
+    projectId: "synthesis-234002",
+    keyFilename: "./server/firestore-config.json"
+});
 
 const app = express();
 app.enable("trust proxy");
-
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -15,11 +18,15 @@ const port = 3001;
 const router = express.Router();
 
 const textToSpeech = require("@google-cloud/text-to-speech");
+const path = require("path");
+const fs = require("fs");
 const util = require("util");
 
+const client = new textToSpeech.TextToSpeechClient();
+
+
 async function convertTextToVoice(text) {
-    console.log(text);
-    const client = new textToSpeech.TextToSpeechClient();
+    console.log(text)
     const request = {
         input: {
             text: text
@@ -33,115 +40,103 @@ async function convertTextToVoice(text) {
         }
     };
 
-    // Performs the Text-to-Speech request
     const [response] = await client.synthesizeSpeech(request);
-    // Write the binary audio content to a local file
     const writeFile = util.promisify(fs.writeFile);
-    await writeFile("src/output.mp3", response.audioContent, "binary");
+    console.log('in convert text to voice', response.audioContent);
+    await writeFile("src/output1.mp3", response.audioContent, "binary");
     return response.audioContent;
-    console.log("Audio content written to file: output.mp3");
 }
 
-const Firestore = require("@google-cloud/firestore");
+async function _writeFile(data) {
+    console.log('Data', data.mp3);
 
-const db = new Firestore({
-    projectId: "synthesis-234002",
-    keyFilename: "./server/firestore-config.json"
-});
+    const writeFile = util.promisify(fs.writeFile);
+    await writeFile("src/output1.mp3", data.mp3, "binary");
+    return data;
+    console.log("Audio content written to file: output1.mp3");
+}
 
-router.post("/voice", (req, res) => {
-    convertTextToVoice(req.body.text).then((res) => {
-            var docRef = db.collection("recordings").doc("001uCHmtHvWiOvgJr9CL");
+// server should get voice recoding
+router.post("/to-voice", (req, res) => {
+    convertTextToVoice(req.body.text).then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            Error(err);
+        })
+})
 
-            docRef.set({
-                    owner: "Mad",
-                    "recording-name": "new recording",
-                    mp3: res,
-                    wave: "Lovelace"
+// server should get voice recoding and save it to DB
+router.post("/save-voice", (req, res) => {
+    convertTextToVoice(req.body.text).then((result) => {
+            db.collection("my-recordings")
+                .doc(req.body.id)
+                .set({
+                    name: req.body.name,
+                    mp3: result
                 })
                 .then((response) => {
-                    console.log('RESPONSE', response);
+                    res.send(response);
+                })
+                .catch((err) => {
+                    Error(err)
                 })
         })
-        .catch((error) => {
-            console.log(error);
+        .catch((err) => {
+            console.log(err);
+            Error(err);
         })
-});
+})
 
-router.get("/get-recording", (req, res) => {
-    db.collection('recordings').get()
-        .then((snapshot) => {
-            snapshot.forEach((doc) => {
-                console.log(doc.id, '=>', doc.data());
+
+// server should save voice recoding and title to DB
+router.post("/save", (req, res) => {
+    db.collection("my-recordings")
+        .doc(req.body.id)
+        .set({
+            ...req.body
+        })
+        .then((response) => {
+            res.send(response);
+            return response;
+        })
+        .catch((err) => {
+            Error(err)
+        })
+})
+
+// server should return last saved item
+router.get("/recording/:id", (req, res) => {
+    console.log(req.params.id);
+    db.collection("my-recordings").doc(req.params.id).get()
+        .then(doc => {
+            if (!doc.exists) {
+                res.send("No such document!");
+            } else {
+                _writeFile(doc.data()).then((response) => {
+                    return res.send(JSON.stringify(response));
+
+                })
+            }
+        })
+        .catch((err) => {
+            Error(err);
+        });
+
+})
+
+// server should return a paginated list of the last 10 items from the DB
+router.get("/recordings", (req, res) => {
+    db.collection("my-recordings").get()
+        .then(snapshot => {
+            snapshot.forEach(doc => {
                 res.send(doc.data());
             });
         })
         .catch((err) => {
-            console.log('Error getting documents', err);
+            Error(err);
         });
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// SAVE PII
-router.post("/new", (req, res) => {
-    const pii = datastore.key("pii");
-    const id = (Math.floor(Math.random() * (1000 - 0 + 1)) + 0).toString();
-    const entity = {
-        key: pii,
-        data: {
-            id: id,
-            message: req.body
-        }
-    };
-    datastore
-        .save(entity)
-        .then(data => {
-            res.send(JSON.stringify(data));
-        })
-        .catch(error => {
-            console.log(error);
-        });
-});
-
-// GET All PII
-router.get("/pii", (req, res) => {
-    const query = datastore.createQuery("pii");
-    datastore.runQuery(query).then(result => {
-        res.send(result);
-    });
-});
-
-router.get("/jwt", (req, res) => {
-    if (req.query.userID) {
-        const token = jwt.sign({
-                pid: ironCoreConfig.projectId,
-                sid: ironCoreConfig.segmentId,
-                kid: ironCoreConfig.serviceKeyId
-            },
-            privateKey, {
-                algorithm: "ES256",
-                expiresIn: "2m",
-                subject: req.query.userID
-            }
-        );
-        res.send(token);
-    } else res.status(404).send("Not found");
-});
 
 app.use("/", router);
 
