@@ -52,7 +52,7 @@ export class Download extends React.Component<AllDownloadProps, DownloadState> {
         <>
           <br />
           <Typography variant="subtitle1" gutterBottom>
-            Play and download MP3 your text to voice MP3.
+            Play and download your text to voice mp3.
           </Typography>
           <audio controls>
             <source src="output1.mp3" type="audio/mp3" />

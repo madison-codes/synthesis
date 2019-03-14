@@ -66,7 +66,7 @@ export class Enter extends React.Component<EnterDispatchProps, EnterState> {
           <Grid item xs={12} sm={6} />
           <Grid item xs={12}>
             <Typography variant="subtitle1" gutterBottom>
-              Enter your text here to see the magic! ✨
+              ✨ Enter your text here to see the magic!
             </Typography>
 
             {/* <TextField
