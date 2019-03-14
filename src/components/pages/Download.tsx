@@ -1,6 +1,9 @@
 import * as React from "react";
 import * as WaveSurfer from "wavesurfer.js";
 import Fab from "../../components/atoms/Fab";
+import { WithStyles, withStyles, createStyles } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 
 interface DownloadProps {
@@ -11,8 +14,19 @@ interface DownloadState {
   loading: boolean;
 }
 
-export class Download extends React.Component<DownloadProps, DownloadState> {
-  constructor(props: DownloadProps) {
+type AllDownloadProps = WithStyles<typeof styles> & DownloadProps;
+
+const styles = () =>
+  createStyles({
+    layout: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
+    }
+  });
+
+export class Download extends React.Component<AllDownloadProps, DownloadState> {
+  constructor(props: AllDownloadProps) {
     super(props);
     this.state = {
       loading: true
@@ -36,6 +50,10 @@ export class Download extends React.Component<DownloadProps, DownloadState> {
     return (
       <>
         <>
+          <br />
+          <Typography variant="subtitle1" gutterBottom>
+            Play and download MP3 your text to voice MP3.
+          </Typography>
           <audio controls>
             <source src="output1.mp3" type="audio/mp3" />
           </audio>
@@ -47,8 +65,8 @@ export class Download extends React.Component<DownloadProps, DownloadState> {
 
   getLoadingMarkup() {
     return (
-      <div>
-        <p>loading...</p>
+      <div className={this.props.classes.layout}>
+        <CircularProgress />
       </div>
     );
   }
@@ -68,4 +86,4 @@ const mapStateToProps = (state: GlobalState) => ({ id: state.id });
 export default connect(
   mapStateToProps,
   {}
-)(Download);
+)(withStyles(styles)(Download));

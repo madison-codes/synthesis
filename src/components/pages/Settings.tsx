@@ -1,10 +1,5 @@
 import * as React from "react";
-// import { initialize } from "../actions/index";
-// import Grid from "@material-ui/core/Grid";
-// import Typography from "@material-ui/core/Typography";
-// import TextField from "@material-ui/core/TextField";
-// import Button from "@material-ui/core/Button";
-// import { connect } from "react-redux";
+import Fab from "../../components/atoms/Fab";
 
 interface SettingsProps {}
 
@@ -15,6 +10,7 @@ export class Settings extends React.Component<SettingsProps, SettingsState> {
     return (
       <div>
         <h1>Settings</h1>
+        <Fab />
       </div>
     );
   }

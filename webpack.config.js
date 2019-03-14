@@ -18,11 +18,6 @@ module.exports = {
                 loader: "awesome-typescript-loader"
             },
             {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"],
-                include: [/src/, /node_modules/]
-            },
-            {
                 test: /\.m?jsx$/,
                 exclude: /node_modules/,
                 use: {

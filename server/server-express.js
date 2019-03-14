@@ -24,9 +24,7 @@ const util = require("util");
 
 const client = new textToSpeech.TextToSpeechClient();
 
-
 async function convertTextToVoice(text) {
-    console.log(text)
     const request = {
         input: {
             text: text
