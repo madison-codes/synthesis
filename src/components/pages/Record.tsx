@@ -1,10 +1,11 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import { WithStyles, withStyles, createStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
-import { toVoice } from "../../actions/index";
+import { saveVoice } from "../../actions/index";
 import { Theme } from "../../theme/Theme";
 import ChatBubble from "@material-ui/icons/ChatBubbleOutline";
 
@@ -26,31 +27,34 @@ const styles = (theme: Theme) =>
     }
   });
 
-interface EnterProps extends WithStyles<typeof styles> {
-  toVoice: (message: string) => void;
+interface EnterDispatchProps extends WithStyles<typeof styles> {
+  saveVoice: (name: string, text: string) => void;
 }
 
 interface EnterState {
-  message: string;
-  snackbarOpen: boolean;
+  name: string;
+  text: string;
 }
 
-export class Enter extends React.Component<EnterProps, EnterState> {
-  constructor(props: EnterProps) {
+export class Enter extends React.Component<EnterDispatchProps, EnterState> {
+  constructor(props: EnterDispatchProps) {
     super(props);
     this.state = {
-      message: "",
-      snackbarOpen: false
+      name: "",
+      text: ""
     };
   }
 
-  addMessage(message: string) {
-    this.setState({ message });
+  addName(name: string) {
+    this.setState({ name });
+  }
+
+  addText(text: string) {
+    this.setState({ text });
   }
 
   submit() {
-    this.props.toVoice(this.state.message);
-    // TODO programatically reroute to Download page
+    this.props.saveVoice(this.state.name, this.state.text);
   }
 
   render() {
@@ -62,9 +66,9 @@ export class Enter extends React.Component<EnterProps, EnterState> {
           <Grid item xs={12}>
             <TextField
               required
-              id="title"
-              name="title"
-              onChange={e => this.addMessage(e.target.value)}
+              id="name"
+              name="name"
+              onChange={e => this.addName(e.target.value)}
               placeholder="Type your title"
               margin="normal"
               fullWidth
@@ -73,29 +77,32 @@ export class Enter extends React.Component<EnterProps, EnterState> {
               required
               id="message"
               name="message"
-              onChange={e => this.addMessage(e.target.value)}
+              onChange={e => this.addText(e.target.value)}
               margin="normal"
               variant="outlined"
               placeholder="Type your text here to convert it to voice."
               fullWidth
             />
           </Grid>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => this.submit()}
-            className={classes.button}
-          >
-            <ChatBubble className={classes.icon} />
-            {"To Voice"}
-          </Button>
+          <Link to="/download">
+            /
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => this.submit()}
+              className={classes.button}
+            >
+              <ChatBubble className={classes.icon} />
+              {"To Voice"}
+            </Button>
+          </Link>
         </Grid>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = { toVoice };
+const mapDispatchToProps = { saveVoice };
 
 export default connect(
   null,

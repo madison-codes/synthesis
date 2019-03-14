@@ -8,8 +8,8 @@ import { Theme } from "../../theme/Theme";
 const styles = (theme: Theme) =>
   createStyles({
     fab: {
-      bottom: theme.spacing.unit,
       position: "fixed",
+      bottom: theme.spacing.unit,
       right: theme.spacing.unit
     }
   });
@@ -21,7 +21,7 @@ interface FabButtonState {}
 export class FabButton extends React.Component<FabButtonProps, FabButtonState> {
   render() {
     const { classes } = this.props;
-    return window.location.pathname === "/" || " " ? null : (
+    return (
       <Link to="/">
         <Fab color="secondary" className={classes.fab}>
           <Add />

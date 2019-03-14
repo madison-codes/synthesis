@@ -1,14 +1,12 @@
 import * as React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { WithStyles, withStyles, createStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "./components/atoms/AppBar";
 import { Theme } from "./theme/Theme";
 import Record from "./components/pages/Record";
 import Download from "./components/pages/Download";
-import Recordings from "./components/pages/Recordings";
 import Settings from "./components/pages/Settings";
-import Fab from "./components/atoms/Fab";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -38,15 +36,9 @@ export class App extends React.Component<AppProps, AppState> {
         <CssBaseline />
         <AppBar />
         <main className={classes.layout}>
-          <Router>
-            <div>
-              <Route path="/" exact component={Record} />
-              <Route path="/settings/" component={Settings} />
-              <Route path="/download/" component={Download} />
-              <Route path="/recordings/" component={Recordings} />
-              <Fab />
-            </div>
-          </Router>
+          <Route path="/" exact component={Record} />
+          <Route path="/settings/" component={Settings} />
+          <Route path="/download/" component={Download} />
         </main>
       </>
     );
