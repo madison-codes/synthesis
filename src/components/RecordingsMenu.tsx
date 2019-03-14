@@ -37,10 +37,10 @@ class RecordingsMenu extends React.Component<
     this.setState({ open: isOpen });
   };
 
-  render() {
+  getList() {
     const { classes } = this.props;
 
-    const sideList = (
+    return (
       <div className={classes.list}>
         <List>
           {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
@@ -65,7 +65,9 @@ class RecordingsMenu extends React.Component<
         </List>
       </div>
     );
+  }
 
+  render() {
     return (
       <div>
         <Button onClick={this.toggleDrawer(true)}>
@@ -82,7 +84,7 @@ class RecordingsMenu extends React.Component<
             onClick={this.toggleDrawer(false)}
             onKeyDown={this.toggleDrawer(false)}
           >
-            {sideList}
+            {this.getList()}
           </div>
         </SwipeableDrawer>
       </div>

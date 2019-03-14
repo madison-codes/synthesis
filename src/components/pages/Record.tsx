@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { saveVoice } from "../../actions/index";
 import { Theme } from "../../theme/Theme";
 import ChatBubble from "@material-ui/icons/ChatBubbleOutline";
+import Typography from "@material-ui/core/Typography";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -64,7 +65,11 @@ export class Enter extends React.Component<EnterDispatchProps, EnterState> {
         <Grid container spacing={24}>
           <Grid item xs={12} sm={6} />
           <Grid item xs={12}>
-            <TextField
+            <Typography variant="subtitle1" gutterBottom>
+              Enter your text here to see the magic! ✨
+            </Typography>
+
+            {/* <TextField
               required
               id="name"
               name="name"
@@ -72,20 +77,20 @@ export class Enter extends React.Component<EnterDispatchProps, EnterState> {
               placeholder="Type your title"
               margin="normal"
               fullWidth
-            />
+            /> */}
             <TextField
               required
               id="message"
               name="message"
+              label="(text)"
               onChange={e => this.addText(e.target.value)}
               margin="normal"
               variant="outlined"
-              placeholder="Type your text here to convert it to voice."
+              placeholder="toVoice = (text) => "
               fullWidth
             />
           </Grid>
           <Link to="/download">
-            /
             <Button
               variant="contained"
               color="primary"
