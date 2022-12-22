@@ -34,7 +34,7 @@
         "firebase-admin": "^7.0.0",
         "fs": "^0.0.1-security",
         "hoist-non-react-statics": "^3.3.0",
-        "jsonwebtoken": "^8.5.0",
+        "jsonwebtoken": "^9.0.0",
         "react": "^16.8.3",
         "react-dom": "^16.8.3",
         "react-redux": "^6.0.1",
